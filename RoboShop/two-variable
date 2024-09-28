@@ -1,0 +1,10 @@
+#!/bin/bash
+# Iterate over the remaining arguments (variable values)
+for variable in {90..99}
+do
+  # Iterate over the projects
+  for i in $(symp -k --username <> --password <> --domain <> --project default project list -c id -c name -c domain_name | grep test | grep vpc | awk '{print $2}')
+  do
+    symp -k --username <> --password <> --domain <> --project default vpc direct-network create $i de544b5d-ac32-4cde-ade0-fac5bcbc1f3e $variable 10.0.0.0/28 10.0.0.1 '[{"start":"10.0.0.2", "end":"10.0.0.10"}]'
+  done
+done
